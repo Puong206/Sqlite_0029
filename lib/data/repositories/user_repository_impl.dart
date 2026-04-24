@@ -42,7 +42,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> deleteUser(int id) async {
+  Future<void> deleteUser(String id) async {
     final db = await dbHelper.database;
     await db.delete('users', where: 'id = ?', whereArgs: [id]);
   }
