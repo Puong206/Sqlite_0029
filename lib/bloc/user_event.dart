@@ -7,7 +7,7 @@ class AddUserEvent extends UserEvent {
   AddUserEvent(this.user);
 }
 class DeleteUserEvent extends UserEvent {
-  final int id;
+  final String id;
   DeleteUserEvent(this.id);
 }
 class UpdateUserEvent extends UserEvent {
