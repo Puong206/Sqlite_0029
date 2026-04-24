@@ -1,14 +1,18 @@
 import 'package:database_paml/bloc/user_bloc.dart';
 import 'package:database_paml/bloc/user_event.dart';
 import 'package:database_paml/data/repositories/user_repository_impl.dart';
+import 'package:database_paml/helper/database_helper.dart';
 import 'package:database_paml/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
 
+  final dbHelper = DatabaseHelper();
+  final UserRepository = UserRepositoryImpl(dbHelper);
 
-  runApp(const MyApp());
+  runApp(MyApp(repository: UserRepository));
 }
 
 class MyApp extends StatelessWidget {
