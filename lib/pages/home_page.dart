@@ -32,10 +32,10 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (_) => UserFormPage(user: user)),
                         ),
-                        IconButton(
+                      ),
+                      IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () => context.read<UserBloc>().add(DeleteUserEvent(user.id)),
-                        ),
                       ),
                     ],
                   ),
