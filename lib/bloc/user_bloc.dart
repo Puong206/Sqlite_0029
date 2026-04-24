@@ -22,6 +22,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       add(LoadUsers());
     });
 
-    
+    on<UpdateUserEvent>((event, emit) async {
+      await repository.updateUser(event.user);
+      add(LoadUsers());
+    });
   }
 }
