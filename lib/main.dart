@@ -10,9 +10,9 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   final dbHelper = DatabaseHelper();
-  final UserRepository = UserRepositoryImpl(dbHelper);
+  final userRepository = UserRepositoryImpl(dbHelper);
 
-  runApp(MyApp(repository: UserRepository));
+  runApp(MyApp(repository: userRepository));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,12 +26,9 @@ class MyApp extends StatelessWidget {
       create: (context) => UserBloc(repository)..add(LoadUsers()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorSchemeSeed: Colors.blue
-        ),
+        theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
         home: const HomePage(),
-      )
+      ),
     );
   }
 }
