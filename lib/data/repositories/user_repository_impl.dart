@@ -11,7 +11,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<List<UserEntity>> getAllUsers() async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query('users');
-    return maps.map((userMap) => UserEntity.fromMap(userMap)).toList(); 
+    return maps.map((userMap) => UserModel.fromMap(userMap)).toList(); 
   }
 
   @override
@@ -39,5 +39,11 @@ class UserRepositoryImpl implements UserRepository {
       where: 'id = ?',
       whereArgs: [user.id],
     );
+  }
+
+  @override
+  Future<void> deleteUser(int id) async {
+    final db = await dbHelper.database;
+    await db.delete('users', where: 'id = ?', whereArgs: [id]);
   }
 }
