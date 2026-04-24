@@ -10,3 +10,12 @@ class UserFormPage extends StatefulWidget {
     State<UserFormPage> createState() => _UserFormPageState();
 }
 
+class _UserFormPageState extends State<UserFormPage> {
+    final _nameController = TextEditingController();
+    final _emailController = TextEditingController();
+
+    @override
+    void initState() {
+        
+    }
+}
