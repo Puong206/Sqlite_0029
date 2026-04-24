@@ -6,4 +6,13 @@ class UserModel extends UserEntity {
     required super.name,
     required super.email,
   });
+
+  // Method toMap sesuai Gambar Anda
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email
+    };
+  }
 }
