@@ -8,11 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class _P {
   static const bg = Color(0xFFF5F3EF);
   static const yellow = Color(0xFFF9E784);
-  static const pink = Color(0xFFF4A7B9);
-  static const green = Color(0xFFB5D5C5);
   static const blue = Color(0xFFB5CCE9);
-  static const lavender = Color(0xFFD4B8E0);
-  static const peach = Color(0xFFF7C59F);
   static const dark = Color(0xFF1C1C1E);
   static const grey = Color(0xFF8E8E93);
   static const white = Color(0xFFFFFFFF);
