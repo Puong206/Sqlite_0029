@@ -26,5 +26,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await repository.updateUser(event.user);
       add(LoadUsers());
     });
+
+    on<DeleteUserEvent>((event, emit) async {
+      await repository.deleteUser(event.id);
+      add(LoadUsers());
+    });
   }
 }
