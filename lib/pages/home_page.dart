@@ -5,34 +5,34 @@ import 'package:database_paml/pages/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ── Palette ───────────────────────────────────────────────────────────────────
+class _P {
+  static const bg      = Color(0xFFF7F7FB);
+  static const white   = Colors.white;
+  static const dark    = Color(0xFF1A1A2E);
+  static const grey    = Color(0xFF8E8E9A);
+  static const yellow  = Color(0xFFFFE066);
+  static const blue    = Color(0xFFBDE3FF);
+  static const pink    = Color(0xFFFFCDD2);
+  static const green   = Color(0xFFB5E8C9);
+  static const peach   = Color(0xFFFFD6B5);
+  static const lavender= Color(0xFFE0CCFF);
+  static const cardColors = [
+    Color(0xFFFFE066),
+    Color(0xFFBDE3FF),
+    Color(0xFFFFCDD2),
+    Color(0xFFB5E8C9),
+    Color(0xFFFFD6B5),
+    Color(0xFFE0CCFF),
+  ];
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      appBar: AppBar(title: const Text('Daftar User')),
-      body: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          if (state is UserLoading) return const Center(child: CircularProgressIndicator());
-          if (state is UserLoaded && state.users.isNotEmpty) {
-            return ListView.builder(
-              itemCount: state.users.length,
-              itemBuilder: (context, index) {
-                final user = state.users[index];
-                return ListTile(
-                  title: Text(user.name),
-                  subtitle: Text(user.email),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.blue),
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => UserFormPage(user: user)),
-=======
       backgroundColor: _P.bg,
       body: SafeArea(
         child: Column(
@@ -646,28 +646,71 @@ class _UserCardState extends State<_UserCard>
                               color: _P.grey,
                             ),
                           ),
->>>>>>> ab00cea (feat: tambahkan tampilan No. Telepon dan Alamat pada kartu pengguna)
                         ),
                       ),
-                      IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => context.read<UserBloc>().add(DeleteUserEvent(user.id)),
-                      ),
-                    ],
+                    ),
                   ),
-                );
-              },
-            );
-          }
-          return const Center(child: Text('Belum ada user. Klik + untuk menambahkan.'));
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const UserFormPage()),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<UserBloc>()
+                            .add(DeleteUserEvent(widget.user.id));
+                        Navigator.pop(ctx);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: _P.pink,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Hapus',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                              color: _P.dark,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _ActionBtn extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _ActionBtn({
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 38,
+        height: 38,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Icon(icon, size: 18, color: _P.dark),
       ),
     );
   }
