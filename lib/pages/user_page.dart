@@ -4,6 +4,15 @@ import 'package:database_paml/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ── Palette ───────────────────────────────────────────────────────────────────
+class _P {
+  static const white  = Colors.white;
+  static const dark   = Color(0xFF1A1A2E);
+  static const grey   = Color(0xFF8E8E9A);
+  static const yellow = Color(0xFFFFE066);
+  static const blue   = Color(0xFFBDE3FF);
+}
+
 class UserFormPage extends StatefulWidget {
     final UserEntity? user;
 
@@ -82,26 +91,25 @@ class _UserFormPageState extends State<UserFormPage> {
             appBar: AppBar(title: Text(isEdit ? 'Edit User' : 'Tambah User')),
             body: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    _buildAvatarPreview(),
-                    const SizedBox(height: 32),
-                    _buildFormCard(),
-                    const SizedBox(height: 28),
-                    _buildSaveButton(context),
-                    if (_isEdit) ...[
-                      const SizedBox(height: 14),
-                      _buildCancelButton(context),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      _buildAvatarPreview(),
+                      const SizedBox(height: 32),
+                      _buildFormCard(),
+                      const SizedBox(height: 28),
+                      _buildSaveButton(context),
+                      if (_isEdit) ...[
+                        const SizedBox(height: 14),
+                        _buildCancelButton(context),
+                      ],
+                      const SizedBox(height: 24),
                     ],
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            );
   }
 
   // ── Top bar ──────────────────────────────────────────────────────────────────
@@ -524,14 +532,6 @@ class _UserFormPageState extends State<UserFormPage> {
       context.read<UserBloc>().add(AddUserEvent(newUser));
     }
 
-                                  Navigator.pop(context);
-                                },
-                                child: Text(isEdit ? "Simpan Perubahan" : "Simpan User Baru"),
-                            ),
-                        )
-                    ]
-                ),
-            )
-        );
-    }
+    Navigator.pop(context);
+  }
 }
